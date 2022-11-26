@@ -5,7 +5,6 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.21"
     kotlin("plugin.spring") version "1.7.21"
-    kotlin("plugin.jpa") version "1.7.21"
 }
 
 group = "ua.wwind.glotov"
@@ -23,19 +22,29 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compileOnly("org.projectlombok:lombok")
+
+    // Actuator
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // WEB
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // PetClinic Data module
+    implementation(project(":pet-clinic-data"))
+
+    // DevTools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    runtimeOnly("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
-    annotationProcessor("org.projectlombok:lombok")
+
+    // Testing
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 }
 
 tasks.withType<KotlinCompile> {
@@ -46,5 +55,9 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
