@@ -21,9 +21,9 @@ scmVersion {
     repository {
         type.set("git")
         val credentials = file("github-axion-release-credentials.txt").readLines()
-        println(credentials.toString())
-        customUsername.set(credentials[0])
-        customPassword.set(credentials[1])
+        //println(credentials.toString())
+        customUsername.set(file("github-axion-release-token.txt").readText())
+        customPassword.set("")
 //        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
         //customPassword.set("")
     }
