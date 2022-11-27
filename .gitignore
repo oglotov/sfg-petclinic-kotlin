@@ -36,3 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 /github-axion-release-token.txt
+/github-axion-release-credentials.txt

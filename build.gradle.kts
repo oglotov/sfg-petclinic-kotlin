@@ -21,7 +21,7 @@ scmVersion {
     repository {
         type.set("git")
 //        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
-        customPassword.set("")
+        //customPassword.set("")
     }
     checks {
         aheadOfRemote.set(false)
@@ -43,5 +43,7 @@ scmVersion {
 }
 
 task("loadGitHubToken") {
-    scmVersion.repository.customUsername.set(file("github-axion-release-token.txt").readText())
+    val credentials = file("github-axion-release-credentials.txt").readLines()
+    scmVersion.repository.customUsername.set(credentials[0])
+    scmVersion.repository.customPassword.set(credentials[1])
 }
