@@ -20,8 +20,8 @@ scmVersion {
     }
     repository {
         type.set("git")
-        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
-        customKeyPassword.set("")
+//        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
+//        customKeyPassword.set("")
     }
     checks {
         aheadOfRemote.set(false)
@@ -40,4 +40,8 @@ scmVersion {
         }
     }
     versionCreator("versionWithBranch")
+}
+
+task("loadGitHubToken") {
+    scmVersion.repository.customUsername.set(file("github-axion-release-token.txt").readText())
 }
