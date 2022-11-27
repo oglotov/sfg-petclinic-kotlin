@@ -20,7 +20,7 @@ scmVersion {
     }
     repository {
         type.set("git")
-        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa.pub"))
+        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
         customKeyPassword.set("")
     }
     checks {
