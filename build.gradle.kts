@@ -18,8 +18,8 @@ scmVersion {
     }
     repository {
         type.set("git")
-        customKeyFile.set(project.file("keys/id_ed25519"))
-        customKeyPassword.set("")
+//        customKeyFile.set(project.file("keys/id_ed25519"))
+//        customKeyPassword.set("")
 //        val credentials = file("github-axion-release-credentials.txt").readLines()
 //        customUsername.set(credentials[0])
 //        customPassword.set(credentials[1])
@@ -48,6 +48,7 @@ scmVersion {
     versionCreator("versionWithBranch")
 }
 
+/*
 task("loadKeyPassword") {
     scmVersion.repository.customKeyPassword.set("")
     // you can load the key from secure storage as well!
@@ -57,6 +58,7 @@ task("loadKeyPassword") {
 tasks.getByName("release") {
     dependsOn("loadKeyPassword")
 }
+*/
 
 project.version = scmVersion.version
 
