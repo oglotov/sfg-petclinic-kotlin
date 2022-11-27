@@ -8,8 +8,6 @@ plugins {
     kotlin("plugin.jpa") version "1.7.21"
 }
 
-group = "ua.wwind.glotov"
-version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
