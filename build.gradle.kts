@@ -9,21 +9,19 @@ repositories {
     mavenCentral()
 }
 
-project.version = scmVersion.version
-
 scmVersion {
     useHighestVersion.set(true)
     tag {
         prefix.set("v")
-        versionSeparator.set("/")
+        versionSeparator.set(".")
         initialVersion({config, position -> "0.0.1"})
     }
     repository {
         type.set("git")
-        val credentials = file("github-axion-release-credentials.txt").readLines()
+//        val credentials = file("github-axion-release-credentials.txt").readLines()
         //println(credentials.toString())
-        customUsername.set(file("github-axion-release-token.txt").readText())
-        customPassword.set("")
+//        customUsername.set(file("github-axion-release-token.txt").readText())
+//        customPassword.set("")
 //        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
         //customPassword.set("")
     }
@@ -46,8 +44,15 @@ scmVersion {
     versionCreator("versionWithBranch")
 }
 
+project.version = scmVersion.version
+
+//allprojects {
+//    project.version = scmVersion.version
+//}
+
+/*
 task("loadGitHubToken") {
     val credentials = file("github-axion-release-credentials.txt").readLines()
     scmVersion.repository.customUsername.set(credentials[0])
     scmVersion.repository.customPassword.set(credentials[1])
-}
+}*/
