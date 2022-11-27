@@ -5,3 +5,4 @@ SFG Pet Clinic (Kotlin version)
 Latest version: 0.1.0
 
 Test update
+Testing ssh update
