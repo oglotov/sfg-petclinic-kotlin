@@ -1,9 +1,7 @@
 plugins {
     // Gradle Release Plugin
-    id("net.researchgate.release") version "3.0.2"
+    id("net.researchgate.release") version "3.0.2" apply false
 }
-
-version = "0.0.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
