@@ -48,6 +48,16 @@ scmVersion {
     versionCreator("versionWithBranch")
 }
 
+task("loadKeyPassword") {
+    scmVersion.repository.customKeyPassword.set("")
+    // you can load the key from secure storage as well!
+    scmVersion.repository.customKey.set(project.file("keys/id_ed25519").readText())
+}
+
+tasks.getByName("release") {
+    dependsOn("loadKeyPassword")
+}
+
 project.version = scmVersion.version
 
 //allprojects {
