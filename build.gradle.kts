@@ -18,13 +18,14 @@ scmVersion {
     }
     repository {
         type.set("git")
-        //val credentials = file("github-axion-release-credentials.txt").readLines()
-        println("$customUsername $customPassword")
+        val credentials = file("github-axion-release-credentials.txt").readLines()
+        customUsername.set(credentials[0])
+        customPassword.set(credentials[1])
+        println("${customUsername.get()} ${customPassword.get()}")
         //customUsername.set(credentials[0])
 //        customUsername.set(file("github-axion-release-token.txt").readText())
 //        customPassword.set("")
 //        customKeyFile.set(file(System.getProperty("user.home") + "${File.separator}.ssh${File.separator}id_rsa"))
-        //customPassword.set(credentials[1])
     }
     checks {
         aheadOfRemote.set(false)
