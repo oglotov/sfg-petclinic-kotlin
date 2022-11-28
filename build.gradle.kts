@@ -4,27 +4,19 @@ plugins {
     kotlin("jvm") version "1.7.21"
     kotlin("plugin.spring") version "1.7.21" apply false
     kotlin("plugin.jpa") version "1.7.21" apply false
-    //id("com.netflix.nebula.release") version "17.1.0"
 }
 
 kotlin {
     jvmToolchain(17)
 }
 
-project.version = "0.1.0"
-
 allprojects {
     description = "Petclinic Kotlin Study Project"
     group = "ua.wwind.glotov"
+    version = "0.1.0-SNAPSHOT"
 
     repositories {
         mavenCentral()
     }
 }
-
-//val rootVersion = version
-
-//subprojects {
-//    version = rootVersion
-//}
 
