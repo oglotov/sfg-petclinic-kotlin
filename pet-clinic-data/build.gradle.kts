@@ -1,16 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.0.0"
-    id("io.spring.dependency-management") version "1.1.0"
-//    id("java")
-    kotlin("jvm") version "1.7.21"
-    kotlin("plugin.spring") version "1.7.21"
-    kotlin("plugin.jpa") version "1.7.21"
+    id("org.springframework.boot") apply false
+    id("io.spring.dependency-management")
+    kotlin("jvm")
+    kotlin("plugin.spring")
+    kotlin("plugin.jpa")
 }
-
-//java.sourceCompatibility = JavaVersion.VERSION_17
-//java.targetCompatibility = JavaVersion.VERSION_17
 
 kotlin {
     jvmToolchain(17)
@@ -48,7 +44,6 @@ dependencies {
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
 
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
