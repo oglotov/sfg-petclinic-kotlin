@@ -11,6 +11,8 @@ kotlin {
     jvmToolchain(17)
 }
 
+project.version = "0.1.0"
+
 allprojects {
     description = "Petclinic Kotlin Study Project"
     group = "ua.wwind.glotov"
