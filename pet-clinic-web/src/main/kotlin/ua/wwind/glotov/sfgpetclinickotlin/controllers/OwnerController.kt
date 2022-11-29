@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
-@RequestMapping("/vets")
+@RequestMapping("/owners")
 @Controller
-class VetController {
+class OwnerController {
     @GetMapping("", "/", "/index", "/index.html")
-    fun listVets() = "vets/index"
+    fun listOwners() = "owners/index"
 }
