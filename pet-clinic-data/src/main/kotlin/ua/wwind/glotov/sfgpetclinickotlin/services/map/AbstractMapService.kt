@@ -1,15 +1,24 @@
 package ua.wwind.glotov.sfgpetclinickotlin.services.map
 
-abstract class AbstractMapService<T, ID> {
-    protected val map: MutableMap<ID?, T> = hashMapOf()
+import ua.wwind.glotov.sfgpetclinickotlin.model.BaseEntity
+
+abstract class AbstractMapService<T: BaseEntity> {
+    private val map: MutableMap<Long, T> = hashMapOf()
     fun findAll(): Set<T> = HashSet(map.values)
-    fun findById(id: ID): T? = map[id]
-    fun save(id: ID?, data: T): T = map.put(id, data).let { data }
-    fun deleteById(id: ID) {
+    fun findById(id: Long): T? = map[id]
+    fun save(data: T): T {
+        val idToSave = data.id ?: getNextId().also { data.id = it }
+        return map.put(idToSave, data).let { data }
+    }
+    fun deleteById(id: Long) {
         map.remove(id)
     }
 
     fun delete(data: T) {
-        map.entries.removeIf { entry -> entry.value?.equals(data) ?: false }
+        map.entries.removeIf { entry -> (entry.value == data) }
+    }
+
+    private fun getNextId(): Long {
+        return map.keys.ifEmpty { setOf(0L) }.max() + 1
     }
 }
