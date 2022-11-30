@@ -1,19 +1,20 @@
 package ua.wwind.glotov.sfgpetclinickotlin.bootstrap
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
 import ua.wwind.glotov.sfgpetclinickotlin.model.Vet
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 import ua.wwind.glotov.sfgpetclinickotlin.services.VetSevice
-import ua.wwind.glotov.sfgpetclinickotlin.services.map.OwnerMapService
-import ua.wwind.glotov.sfgpetclinickotlin.services.map.VetMapService
 
 @Component
 class DataLoader: CommandLineRunner {
 
-    private val ownerService: OwnerService = OwnerMapService()
-    private val vetService: VetSevice = VetMapService()
+    @Autowired
+    lateinit var ownerService: OwnerService
+    @Autowired
+    lateinit var vetService: VetSevice
 
     override fun run(vararg args: String?) {
         Owner()
