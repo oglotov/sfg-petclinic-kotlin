@@ -2,8 +2,13 @@ package ua.wwind.glotov.sfgpetclinickotlin.model
 
 import java.time.LocalDate
 
-class Pet : BaseEntity() {
-    var petType: PetType? = null
-    var owner: Owner? = null
+data class Pet(
+    var name: String = "",
+    var petType: PetType? = null,
+    var owner: Owner? = null,
     var birthDate: LocalDate? = null
+) : BaseEntity() {
+    fun toStringWithoutOwner(): String {
+        return "Pet(id=$id, name=$name, petType=$petType, birthDate=$birthDate)"
+    }
 }

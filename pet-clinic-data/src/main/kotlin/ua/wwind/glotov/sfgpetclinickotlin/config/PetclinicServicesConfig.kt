@@ -13,11 +13,13 @@ import ua.wwind.glotov.sfgpetclinickotlin.services.map.VetMapService
 
 @Configuration
 class PetclinicServicesConfig {
-    @Bean
-    fun ownerService(): OwnerService = OwnerMapService()
 
     @Bean
-    fun petService(): PetService = PetMapService()
+    fun petService(petTypeService: PetTypeService): PetService = PetMapService(petTypeService)
+
+    @Bean
+    fun ownerService(petTypeService: PetTypeService, petService: PetService): OwnerService =
+        OwnerMapService(petTypeService, petService)
 
     @Bean
     fun vetService(): VetSevice = VetMapService()

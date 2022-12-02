@@ -6,7 +6,7 @@ abstract class AbstractMapService<T: BaseEntity> {
     private val map: MutableMap<Long, T> = hashMapOf()
     fun findAll(): Set<T> = HashSet(map.values)
     fun findById(id: Long): T? = map[id]
-    fun save(data: T): T {
+    open fun save(data: T): T {
         val idToSave = data.id ?: getNextId().also { data.id = it }
         return map.put(idToSave, data).let { data }
     }
