@@ -35,6 +35,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
+    // Cache
+    implementation("javax.cache:cache-api")
+
+    // WebJars
+    implementation("org.webjars:webjars-locator-core")
+    implementation("org.webjars.npm:bootstrap:5.1.3")
+    implementation("org.webjars.npm:font-awesome:4.7.0")
+
     // PetClinic Data module
     implementation(project(":pet-clinic-data"))
 
