@@ -4,19 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
+import ua.wwind.glotov.sfgpetclinickotlin.model.PetType
 import ua.wwind.glotov.sfgpetclinickotlin.model.Vet
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
+import ua.wwind.glotov.sfgpetclinickotlin.services.PetTypeService
 import ua.wwind.glotov.sfgpetclinickotlin.services.VetSevice
 
 @Component
-class DataLoader: CommandLineRunner {
-
-    @Autowired
-    lateinit var ownerService: OwnerService
-    @Autowired
-    lateinit var vetService: VetSevice
+class DataLoader @Autowired constructor(
+    val petTypeService: PetTypeService,
+    val ownerService: OwnerService,
+    val vetService: VetSevice
+): CommandLineRunner {
 
     override fun run(vararg args: String?) {
+
+        PetType("Dog").also { petTypeService.save(it) }
+        PetType("Cat").also { petTypeService.save(it) }
+        println("Loaded pet types")
+
         Owner()
             .apply {
                 firstName = "Michael"
