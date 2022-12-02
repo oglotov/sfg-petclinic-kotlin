@@ -1,3 +1,5 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
-class Vet : Person()
+class Vet : Person() {
+    var specialities: MutableSet<Specialty> = mutableSetOf()
+}
