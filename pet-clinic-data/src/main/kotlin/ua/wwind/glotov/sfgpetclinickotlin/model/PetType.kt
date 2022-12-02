@@ -1,5 +1,5 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
-class PetType {
+class PetType : BaseEntity() {
     var name: String = ""
 }
