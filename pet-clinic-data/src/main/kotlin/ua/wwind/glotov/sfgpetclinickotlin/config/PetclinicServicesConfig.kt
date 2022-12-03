@@ -16,7 +16,7 @@ class PetclinicServicesConfig {
         OwnerMapService(petTypeService, petService)
 
     @Bean
-    fun vetService(): VetSevice = VetMapService()
+    fun vetService(specialtyService: SpecialtyService): VetSevice = VetMapService(specialtyService)
 
     @Bean
     fun petTypeService(): PetTypeService = PetTypeMapService()

@@ -3,28 +3,29 @@ package ua.wwind.glotov.sfgpetclinickotlin.bootstrap
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
-import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
-import ua.wwind.glotov.sfgpetclinickotlin.model.Pet
-import ua.wwind.glotov.sfgpetclinickotlin.model.PetType
-import ua.wwind.glotov.sfgpetclinickotlin.model.Vet
+import ua.wwind.glotov.sfgpetclinickotlin.model.*
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 import ua.wwind.glotov.sfgpetclinickotlin.services.PetTypeService
+import ua.wwind.glotov.sfgpetclinickotlin.services.SpecialtyService
 import ua.wwind.glotov.sfgpetclinickotlin.services.VetSevice
 import java.time.LocalDate
 
 @Component
 class DataLoader @Autowired constructor(
-    val petTypeService: PetTypeService,
-    val ownerService: OwnerService,
-    val vetService: VetSevice
+    private val petTypeService: PetTypeService,
+    private val ownerService: OwnerService,
+    private val vetService: VetSevice,
+    private val specialtyService: SpecialtyService
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
+        if (petTypeService.findAll().isEmpty()) loadData()
+    }
 
+    private fun loadData() {
         val dog = PetType("Dog").also { petTypeService.save(it) }
         val cat = PetType("Cat").also { petTypeService.save(it) }
         println("Loaded pet types")
-
 
         Owner()
             .apply {
@@ -72,19 +73,29 @@ class DataLoader @Autowired constructor(
             }
         println("Loaded owners")
 
+        val dentistry = Specialty("dentistry")
+        val radiology = Specialty("radiology")
+        val surgery = Specialty("surgery")
+
         Vet()
             .apply {
                 firstName = "Sam"
                 lastName = "Axe"
+                specialities.add(dentistry)
+                specialities.add(surgery)
             }.also {
                 vetService.save(it)
+                println(it)
             }
         Vet()
             .apply {
                 firstName = "John"
                 lastName = "Silver"
+                specialities.add(radiology)
+                specialities.add(surgery)
             }.also {
                 vetService.save(it)
+                println(it)
             }
         println("Loaded vets")
     }
