@@ -1,9 +1,14 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
-data class Vet(
+import jakarta.persistence.*
+
+@Entity
+@Table(name = "vets")
+class Vet : Person() {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "vets_specialities",
+        joinColumns = [JoinColumn(name = "vet_id")],
+        inverseJoinColumns = [JoinColumn(name = "spec_id")])
     val specialities: MutableSet<Specialty> = mutableSetOf()
-) : Person() {
-    override fun toString(): String {
-        return "Vet(id=$id, firstName=$firstName, lastName=$lastName, specialities=$specialities)"
-    }
 }

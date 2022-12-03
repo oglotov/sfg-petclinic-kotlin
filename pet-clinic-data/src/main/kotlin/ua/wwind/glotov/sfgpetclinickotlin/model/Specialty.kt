@@ -1,9 +1,12 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
-data class Specialty(
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+
+@Entity
+@Table(name = "specialties")
+class Specialty(
+    @Column(name = "name")
     var description: String? = null
-) : BaseEntity() {
-    override fun toString(): String {
-        return "Specialty(id=$id, description=$description)"
-    }
-}
+) : BaseEntity()
