@@ -17,4 +17,6 @@ class Pet(
     @ManyToOne
     @JoinColumn(name = "owner_id")
     var owner: Owner? = null
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "pet")
+    val visits: MutableSet<Visit> = mutableSetOf()
 }
