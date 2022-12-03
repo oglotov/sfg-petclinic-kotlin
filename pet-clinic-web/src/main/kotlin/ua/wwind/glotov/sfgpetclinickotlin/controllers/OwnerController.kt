@@ -16,4 +16,9 @@ class OwnerController @Autowired constructor(private val ownerService: OwnerServ
         model.addAttribute("owners", ownerService.findAll())
         return "owners/index"
     }
+
+    @GetMapping("/find")
+    fun findOwners(model: Model): String {
+        return "notimplemented"
+    }
 }
