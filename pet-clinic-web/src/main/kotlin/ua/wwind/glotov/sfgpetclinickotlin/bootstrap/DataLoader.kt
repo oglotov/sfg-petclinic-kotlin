@@ -40,15 +40,13 @@ class DataLoader @Autowired constructor(
                         Pet(
                             name = "Elza",
                             petType = dog,
-                            owner = it,
                             birthDate = LocalDate.now()
-                        ),
+                        ).apply { owner = it },
                         Pet(
                             "Sosyska",
                             petType = dog,
-                            owner = it,
                             birthDate = LocalDate.now()
-                        )
+                        ).apply { owner = it }
                     )
                 )
                 ownerService.save(it)
@@ -64,8 +62,8 @@ class DataLoader @Autowired constructor(
             }.also {
                 it.pets.addAll(
                     setOf(
-                        Pet("Tishka", cat, it, LocalDate.now()),
-                        Pet("Brovko", dog, it, LocalDate.now())
+                        Pet("Tishka", cat, LocalDate.now()).apply { owner = it },
+                        Pet("Brovko", dog, LocalDate.now()).apply { owner = it }
                     )
                 )
                 ownerService.save(it)

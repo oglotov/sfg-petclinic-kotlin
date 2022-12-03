@@ -1,14 +1,20 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
+import jakarta.persistence.*
 import java.time.LocalDate
 
-data class Pet(
+@Entity
+@Table(name = "pets")
+class Pet(
+    @Column(name = "name")
     var name: String = "",
+    @ManyToOne
+    @JoinColumn(name = "type_id")
     var petType: PetType? = null,
-    var owner: Owner? = null,
+    @Column(name = "birth_date")
     var birthDate: LocalDate? = null
 ) : BaseEntity() {
-    fun toStringWithoutOwner(): String {
-        return "Pet(id=$id, name=$name, petType=$petType, birthDate=$birthDate)"
-    }
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    var owner: Owner? = null
 }

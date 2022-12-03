@@ -1,7 +1,12 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
-data class PetType (var name: String) : BaseEntity() {
-    override fun toString(): String {
-        return "PetType(id=$id, name='$name')"
-    }
-}
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+
+@Entity
+@Table(name = "pet_types")
+class PetType (
+    @Column(name = "name")
+    var name: String
+) : BaseEntity()
