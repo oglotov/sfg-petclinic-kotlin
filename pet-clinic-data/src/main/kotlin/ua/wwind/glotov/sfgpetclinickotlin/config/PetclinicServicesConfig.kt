@@ -28,6 +28,9 @@ class PetclinicServicesConfig {
     fun specialtyService(): SpecialtyService = SpecialtyMapService()
 
     @Bean
+    fun visitService(): VisitService = VisitMapService()
+
+    @Bean
     @Profile("springdatajpa")
     fun ownerSDJpaService(ownerRepository: OwnerRepository): OwnerService =
         OwnerSDJpaService(ownerRepository)
@@ -50,4 +53,8 @@ class PetclinicServicesConfig {
     fun specialtySDJpaService(specialtyRepository: SpecialtyRepository): SpecialtyService =
         SpecialtySDJpaService(specialtyRepository)
 
+    @Bean
+    @Profile("springdatajpa")
+    fun visitSDJpaService(visitRepository: VisitRepository): VisitService =
+        VisitSDJpaService(visitRepository)
 }
