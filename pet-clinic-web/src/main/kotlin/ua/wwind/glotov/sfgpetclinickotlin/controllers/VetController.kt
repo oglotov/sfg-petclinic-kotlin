@@ -5,11 +5,11 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import ua.wwind.glotov.sfgpetclinickotlin.services.VetSevice
+import ua.wwind.glotov.sfgpetclinickotlin.services.VetService
 
 @RequestMapping("/vets")
 @Controller
-class VetController @Autowired constructor(private val vetService: VetSevice) {
+class VetController @Autowired constructor(private val vetService: VetService) {
     @GetMapping("", "/", "/index", "/index.html")
     fun listVets(model: Model): String {
         model.addAttribute("vets", vetService.findAll())

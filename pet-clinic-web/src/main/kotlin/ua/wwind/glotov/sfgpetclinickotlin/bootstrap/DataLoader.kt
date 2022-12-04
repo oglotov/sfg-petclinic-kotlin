@@ -7,14 +7,14 @@ import ua.wwind.glotov.sfgpetclinickotlin.model.*
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 import ua.wwind.glotov.sfgpetclinickotlin.services.PetTypeService
 import ua.wwind.glotov.sfgpetclinickotlin.services.SpecialtyService
-import ua.wwind.glotov.sfgpetclinickotlin.services.VetSevice
+import ua.wwind.glotov.sfgpetclinickotlin.services.VetService
 import java.time.LocalDate
 
 @Component
 class DataLoader @Autowired constructor(
     private val petTypeService: PetTypeService,
     private val ownerService: OwnerService,
-    private val vetService: VetSevice,
+    private val vetService: VetService,
     private val specialtyService: SpecialtyService
 ) : CommandLineRunner {
 

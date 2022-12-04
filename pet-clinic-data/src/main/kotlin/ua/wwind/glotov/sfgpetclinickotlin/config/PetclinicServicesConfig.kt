@@ -4,9 +4,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
 import ua.wwind.glotov.sfgpetclinickotlin.repositories.OwnerRepository
+import ua.wwind.glotov.sfgpetclinickotlin.repositories.VetRepository
 import ua.wwind.glotov.sfgpetclinickotlin.services.*
 import ua.wwind.glotov.sfgpetclinickotlin.services.map.*
 import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.OwnerSDJpaService
+import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.VetSDJpaService
 
 @Configuration
 class PetclinicServicesConfig {
@@ -19,7 +21,7 @@ class PetclinicServicesConfig {
         OwnerMapService(petTypeService, petService)
 
     @Bean
-    fun vetService(specialtyService: SpecialtyService): VetSevice = VetMapService(specialtyService)
+    fun vetService(specialtyService: SpecialtyService): VetService = VetMapService(specialtyService)
 
     @Bean
     fun petTypeService(): PetTypeService = PetTypeMapService()
@@ -31,5 +33,9 @@ class PetclinicServicesConfig {
     @Profile("springdatajpa")
     fun ownerSDJpaService(ownerRepository: OwnerRepository): OwnerService =
         OwnerSDJpaService(ownerRepository)
+
+    @Bean
+    @Profile("springdatajpa")
+    fun vetSDJpaService(vetRepository: VetRepository): VetService = VetSDJpaService(vetRepository)
 
 }

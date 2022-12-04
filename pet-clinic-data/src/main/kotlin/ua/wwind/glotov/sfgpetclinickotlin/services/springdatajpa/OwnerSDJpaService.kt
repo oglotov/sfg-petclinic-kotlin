@@ -5,11 +5,11 @@ import ua.wwind.glotov.sfgpetclinickotlin.repositories.OwnerRepository
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 import kotlin.jvm.optionals.getOrNull
 
-class OwnerSDJpaService constructor(
+class OwnerSDJpaService(
     private val ownerRepository: OwnerRepository,
 //    private val petTypeService: PetTypeService,
 //    private val petService: PetService
-    ) : OwnerService {
+) : OwnerService {
     @OptIn(ExperimentalStdlibApi::class)
     override fun findById(id: Long): Owner? = ownerRepository.findById(id).getOrNull()
 
