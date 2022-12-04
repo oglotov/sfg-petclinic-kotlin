@@ -10,7 +10,7 @@ class OwnerMapService(
     private val petService: PetService,
     ) : AbstractMapService<Owner>(),
     OwnerService {
-    override fun findByLastName(lastName: String): Owner {
+    override fun findByLastName(lastName: String): Owner? {
         TODO("Not yet implemented")
     }
 
