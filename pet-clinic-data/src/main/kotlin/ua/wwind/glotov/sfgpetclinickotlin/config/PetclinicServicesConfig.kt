@@ -3,16 +3,10 @@ package ua.wwind.glotov.sfgpetclinickotlin.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
-import ua.wwind.glotov.sfgpetclinickotlin.repositories.OwnerRepository
-import ua.wwind.glotov.sfgpetclinickotlin.repositories.PetRepository
-import ua.wwind.glotov.sfgpetclinickotlin.repositories.PetTypeRepository
-import ua.wwind.glotov.sfgpetclinickotlin.repositories.VetRepository
+import ua.wwind.glotov.sfgpetclinickotlin.repositories.*
 import ua.wwind.glotov.sfgpetclinickotlin.services.*
 import ua.wwind.glotov.sfgpetclinickotlin.services.map.*
-import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.OwnerSDJpaService
-import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.PetSDJpaService
-import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.PetTypeSDJpaService
-import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.VetSDJpaService
+import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.*
 
 @Configuration
 class PetclinicServicesConfig {
@@ -44,10 +38,16 @@ class PetclinicServicesConfig {
 
     @Bean
     @Profile("springdatajpa")
-    fun petTypeSDJpaService(petTypeRepository: PetTypeRepository): PetTypeService = PetTypeSDJpaService(petTypeRepository)
+    fun petTypeSDJpaService(petTypeRepository: PetTypeRepository): PetTypeService =
+        PetTypeSDJpaService(petTypeRepository)
 
     @Bean
     @Profile("springdatajpa")
     fun petSDJpaService(petRepository: PetRepository): PetService = PetSDJpaService(petRepository)
+
+    @Bean
+    @Profile("springdatajpa")
+    fun specialtySDJpaService(specialtyRepository: SpecialtyRepository): SpecialtyService =
+        SpecialtySDJpaService(specialtyRepository)
 
 }
