@@ -72,9 +72,9 @@ class DataLoader @Autowired constructor(
             }
         println("Loaded owners")
 
-        val dentistry = Specialty("dentistry")
-        val radiology = Specialty("radiology")
-        val surgery = Specialty("surgery")
+        val dentistry = Specialty("dentistry").also { specialtyService.save(it) }
+        val radiology = Specialty("radiology").also { specialtyService.save(it) }
+        val surgery = Specialty("surgery").also { specialtyService.save(it) }
 
         Vet()
             .apply {

@@ -12,22 +12,28 @@ import ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa.*
 class PetclinicServicesConfig {
 
     @Bean
+    @Profile("default,map")
     fun petService(petTypeService: PetTypeService): PetService = PetMapService(petTypeService)
 
     @Bean
+    @Profile("default,map")
     fun ownerService(petTypeService: PetTypeService, petService: PetService): OwnerService =
         OwnerMapService(petTypeService, petService)
 
     @Bean
+    @Profile("default,map")
     fun vetService(specialtyService: SpecialtyService): VetService = VetMapService(specialtyService)
 
     @Bean
+    @Profile("default,map")
     fun petTypeService(): PetTypeService = PetTypeMapService()
 
     @Bean
+    @Profile("default,map")
     fun specialtyService(): SpecialtyService = SpecialtyMapService()
 
     @Bean
+    @Profile("default,map")
     fun visitService(): VisitService = VisitMapService()
 
     @Bean
