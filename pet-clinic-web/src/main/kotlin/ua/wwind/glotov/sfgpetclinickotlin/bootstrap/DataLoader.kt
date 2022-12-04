@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 import ua.wwind.glotov.sfgpetclinickotlin.model.*
-import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
-import ua.wwind.glotov.sfgpetclinickotlin.services.PetTypeService
-import ua.wwind.glotov.sfgpetclinickotlin.services.SpecialtyService
-import ua.wwind.glotov.sfgpetclinickotlin.services.VetService
+import ua.wwind.glotov.sfgpetclinickotlin.services.*
 import java.time.LocalDate
 
 @Component
@@ -15,7 +12,8 @@ class DataLoader @Autowired constructor(
     private val petTypeService: PetTypeService,
     private val ownerService: OwnerService,
     private val vetService: VetService,
-    private val specialtyService: SpecialtyService
+    private val specialtyService: SpecialtyService,
+    private val visitService: VisitService,
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
@@ -23,6 +21,7 @@ class DataLoader @Autowired constructor(
     }
 
     private fun loadData() {
+        val petList = mutableListOf<Pet>()
         val dog = PetType("Dog").also { petTypeService.save(it) }
         val cat = PetType("Cat").also { petTypeService.save(it) }
         println("Loaded pet types")
@@ -41,12 +40,14 @@ class DataLoader @Autowired constructor(
                             name = "Elza",
                             petType = dog,
                             birthDate = LocalDate.now()
-                        ).apply { owner = it },
+                        ).apply { owner = it }
+                            .also { pet -> petList.add(pet) },
                         Pet(
                             "Sosyska",
                             petType = dog,
                             birthDate = LocalDate.now()
                         ).apply { owner = it }
+                            .also { pet -> petList.add(pet) },
                     )
                 )
                 ownerService.save(it)
@@ -62,8 +63,8 @@ class DataLoader @Autowired constructor(
             }.also {
                 it.pets.addAll(
                     setOf(
-                        Pet("Tishka", cat, LocalDate.now()).apply { owner = it },
-                        Pet("Brovko", dog, LocalDate.now()).apply { owner = it }
+                        Pet("Tishka", cat, LocalDate.now()).apply { owner = it }.also { pet -> petList.add(pet) },
+                        Pet("Brovko", dog, LocalDate.now()).apply { owner = it }.also { pet -> petList.add(pet) },
                     )
                 )
                 ownerService.save(it)
@@ -96,5 +97,15 @@ class DataLoader @Autowired constructor(
                 println(it)
             }
         println("Loaded vets")
+
+        Visit().apply {
+            description = "neutered"
+            pet = petList[0]
+        }.also { visitService.save(it) }
+        Visit().apply {
+            description = "rabies shot"
+            pet = petList.last()
+        }.also { visitService.save(it) }
+        println("Loaded visits")
     }
 }
