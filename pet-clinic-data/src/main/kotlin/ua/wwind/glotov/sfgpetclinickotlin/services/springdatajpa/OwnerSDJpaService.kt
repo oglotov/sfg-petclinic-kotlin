@@ -1,5 +1,6 @@
 package ua.wwind.glotov.sfgpetclinickotlin.services.springdatajpa
 
+import mu.KotlinLogging
 import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
 import ua.wwind.glotov.sfgpetclinickotlin.repositories.OwnerRepository
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
@@ -10,10 +11,13 @@ class OwnerSDJpaService(
 //    private val petTypeService: PetTypeService,
 //    private val petService: PetService
 ) : OwnerService {
+
+    private val log = KotlinLogging.logger {  }
     @OptIn(ExperimentalStdlibApi::class)
     override fun findById(id: Long): Owner? = ownerRepository.findById(id).getOrNull()
 
     override fun save(data: Owner): Owner {
+        log.debug { "Saving owner with name ${data.firstName}" }
         return ownerRepository.save(data)
     }
 

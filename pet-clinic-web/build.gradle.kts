@@ -40,7 +40,7 @@ dependencies {
 
     // WebJars
     implementation("org.webjars:webjars-locator-core")
-    implementation("org.webjars.npm:bootstrap:5.1.3")
+    implementation("org.webjars.npm:bootstrap:5.2.3")
     implementation("org.webjars.npm:font-awesome:4.7.0")
 
     // PetClinic Data module
@@ -48,6 +48,10 @@ dependencies {
 
     // DevTools
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+
+    // Logging
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
+    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.9")
 
     // Testing
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
