@@ -50,8 +50,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     // Logging
-    implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
-    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.9")
+    // implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
 
     // Testing
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
