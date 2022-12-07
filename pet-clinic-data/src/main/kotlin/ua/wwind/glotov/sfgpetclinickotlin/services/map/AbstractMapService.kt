@@ -3,7 +3,7 @@ package ua.wwind.glotov.sfgpetclinickotlin.services.map
 import ua.wwind.glotov.sfgpetclinickotlin.model.BaseEntity
 
 abstract class AbstractMapService<T: BaseEntity> {
-    private val map: MutableMap<Long, T> = hashMapOf()
+    internal val map: MutableMap<Long, T> = hashMapOf()
     fun findAll(): Set<T> = HashSet(map.values)
     fun findById(id: Long): T? = map[id]
     open fun save(data: T): T {
