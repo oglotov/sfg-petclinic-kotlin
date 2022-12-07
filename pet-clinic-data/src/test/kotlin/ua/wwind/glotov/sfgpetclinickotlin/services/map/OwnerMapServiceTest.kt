@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test
 import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
 import ua.wwind.glotov.sfgpetclinickotlin.model.Pet
 import ua.wwind.glotov.sfgpetclinickotlin.model.PetType
+import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerServiceUtils
 import java.time.LocalDate
 
 class OwnerMapServiceTest {
@@ -94,11 +95,7 @@ class OwnerMapServiceTest {
 
     @Test
     fun saveNewId() {
-        val newOwner = Owner().apply {
-            id = null
-            firstName = "Peter"
-            lastName = "Smith"
-        }.also { ownerService.save(it) }
+        val newOwner = OwnerServiceUtils.getNewOwner().also { ownerService.save(it) }
         assertEquals(ownerService.findAll().size, 2)
         assertNotNull(newOwner.id)
         assertEquals(newOwner.id, 2L)

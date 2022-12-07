@@ -8,8 +8,6 @@ import kotlin.jvm.optionals.getOrNull
 
 class OwnerSDJpaService(
     private val ownerRepository: OwnerRepository,
-//    private val petTypeService: PetTypeService,
-//    private val petService: PetService
 ) : OwnerService {
 
     private val log = KotlinLogging.logger {  }

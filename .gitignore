@@ -38,4 +38,6 @@ out/
 
 ### Secret Keys ###
 /keys/
+
+### Logs ###
 **/logs/**/*
