@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
+    id("org.jetbrains.kotlin.plugin.allopen")// version "1.7.10"
     kotlin("jvm")
     kotlin("plugin.spring")
     kotlin("plugin.jpa")
@@ -50,6 +51,11 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.mockito:mockito-core:4.8.0")
     testImplementation("org.mockito:mockito-junit-jupiter:4.8.0")
+}
+
+// All the entity classes must be opened for JPA
+allOpen {
+    annotation("javax.persistence.Entity")
 }
 
 tasks.withType<KotlinCompile> {
