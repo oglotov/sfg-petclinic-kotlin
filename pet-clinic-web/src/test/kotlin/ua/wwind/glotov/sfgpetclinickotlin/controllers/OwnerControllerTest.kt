@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.view
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 
@@ -44,5 +43,15 @@ class OwnerControllerTest(@Autowired val mockMvc: MockMvc) {
 
     @Test
     fun findOwners() {
+    }
+
+    @Test
+    fun showOwner() {
+        val owner = Owner().apply { id = 1L }
+        every { ownerService.findById(1L) } returns owner
+        mockMvc.perform(get("/owners/1"))
+            .andExpect(status().isOk)
+            .andExpect(model().attributeExists("owner"))
+            .andExpect(view().name("owners/ownerDetails"))
     }
 }
