@@ -1,6 +1,7 @@
 package ua.wwind.glotov.sfgpetclinickotlin.model
 
 import jakarta.persistence.*
+import org.hibernate.Hibernate
 import java.time.LocalDate
 
 @Entity
@@ -16,23 +17,17 @@ class Visit : BaseEntity() {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
+        if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false
         other as Visit
 
-        if (id != other.id) return false
-        if (date != other.date) return false
-        if (description != other.description) return false
-        if (pet != other.pet) return false
-
-        return true
+        return id != null && id == other.id
     }
 
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + date.hashCode()
-        result = 31 * result + (description?.hashCode() ?: 0)
-        result = 31 * result + (pet?.hashCode() ?: 0)
-        return result
+    override fun hashCode(): Int = javaClass.hashCode()
+
+    @Override
+    override fun toString(): String {
+        return this::class.simpleName + "(id = $id , date = $date , description = $description , petId = ${pet?.id} )"
     }
+
 }
