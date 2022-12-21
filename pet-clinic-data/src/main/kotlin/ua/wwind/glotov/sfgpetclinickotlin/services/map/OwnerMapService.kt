@@ -15,6 +15,7 @@ class OwnerMapService(
 
     override fun save(data: Owner): Owner {
         data.pets.forEach {
+            it.owner = data
             if (it.petType != null) {
                 if (it.petType!!.id == null) petTypeService.save(it.petType!!)
             } else throw RuntimeException("Required Pet Type")

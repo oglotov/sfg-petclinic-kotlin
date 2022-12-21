@@ -13,10 +13,6 @@ class PetclinicServicesConfig {
 
     @Bean
     @Profile("default,map")
-    fun petService(petTypeService: PetTypeService): PetService = PetMapService(petTypeService)
-
-    @Bean
-    @Profile("default,map")
     fun ownerService(petTypeService: PetTypeService, petService: PetService): OwnerService =
         OwnerMapService(petTypeService, petService)
 
@@ -27,6 +23,10 @@ class PetclinicServicesConfig {
     @Bean
     @Profile("default,map")
     fun petTypeService(): PetTypeService = PetTypeMapService()
+
+    @Bean
+    @Profile("default,map")
+    fun petService(petTypeService: PetTypeService): PetService = PetMapService(petTypeService)
 
     @Bean
     @Profile("default,map")
