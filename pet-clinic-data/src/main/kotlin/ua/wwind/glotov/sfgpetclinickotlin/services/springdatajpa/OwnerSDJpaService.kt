@@ -25,5 +25,5 @@ class OwnerSDJpaService(
 
     override fun deleteById(id: Long) = ownerRepository.deleteById(id)
 
-    override fun findByLastName(lastName: String): Owner? = ownerRepository.findByLastName(lastName)
+    override fun findByLastName(lastName: String): List<Owner> = ownerRepository.findByLastNameContainsIgnoreCase(lastName)
 }

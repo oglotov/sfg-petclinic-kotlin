@@ -10,8 +10,8 @@ class OwnerMapService(
     private val petService: PetService,
     ) : AbstractMapService<Owner>(),
     OwnerService {
-    override fun findByLastName(lastName: String): Owner? =
-        map.filter { it.value.lastName.equals(lastName, true) }.firstNotNullOfOrNull { it.value }
+    override fun findByLastName(lastName: String): List<Owner> =
+        map.filter { it.value.lastName.equals(lastName, true) }.values.toList()
 
     override fun save(data: Owner): Owner {
         data.pets.forEach {

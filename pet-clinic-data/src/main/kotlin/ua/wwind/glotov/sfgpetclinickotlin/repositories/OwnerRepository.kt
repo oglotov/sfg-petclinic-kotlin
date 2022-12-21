@@ -6,5 +6,5 @@ import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
 
 @Repository
 interface OwnerRepository: ListCrudRepository<Owner, Long> {
-    fun findByLastName(lastName: String): Owner?
+    fun findByLastNameContainsIgnoreCase(lastName: String): List<Owner>
 }
