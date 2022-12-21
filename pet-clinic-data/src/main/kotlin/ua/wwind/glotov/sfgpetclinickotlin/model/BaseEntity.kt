@@ -11,4 +11,7 @@ open class BaseEntity : Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+
+    val isNew: Boolean
+        get() = id == null
 }

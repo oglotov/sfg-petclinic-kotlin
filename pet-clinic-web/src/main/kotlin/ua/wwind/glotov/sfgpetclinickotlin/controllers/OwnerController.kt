@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.WebDataBinder
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.InitBinder
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import ua.wwind.glotov.sfgpetclinickotlin.model.Owner
 import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 
@@ -16,9 +13,47 @@ import ua.wwind.glotov.sfgpetclinickotlin.services.OwnerService
 @Controller
 class OwnerController @Autowired constructor(private val ownerService: OwnerService) {
 
+    companion object {
+        const val VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm"
+    }
+
     @InitBinder
     fun setAllowedFields(dataBinder: WebDataBinder) {
         dataBinder.setDisallowedFields("id")
+    }
+
+    @GetMapping("/new")
+    fun initCreationForm(model: Model): String {
+        model.addAttribute("owner", Owner())
+        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM
+    }
+
+    @PostMapping("/new")
+    fun processCreationForm(owner: Owner, result: BindingResult): String {
+        return if (result.hasErrors()) {
+            VIEWS_OWNER_CREATE_OR_UPDATE_FORM
+        } else {
+            ownerService.save(owner)
+            "redirect:/owners/${owner.id}"
+        }
+    }
+
+    @GetMapping("/{ownerId}/edit")
+    fun initUpdateOwnerForm(@PathVariable("ownerId") ownerId: Long, model: Model): String {
+        val owner = ownerService.findById(ownerId)
+        model.addAttribute("owner", owner)
+        return VIEWS_OWNER_CREATE_OR_UPDATE_FORM
+    }
+
+    @PostMapping("/{ownerId}/edit")
+    fun processUpdateOwnerForm(owner: Owner, result: BindingResult, @PathVariable("ownerId") ownerId: Long): String {
+        return if (result.hasErrors()) {
+            VIEWS_OWNER_CREATE_OR_UPDATE_FORM
+        } else {
+            owner.id = ownerId
+            ownerService.save(owner)
+            "redirect:/owners/{ownerId}"
+        }
     }
 
     @GetMapping("", "/", "/index", "/index.html")
